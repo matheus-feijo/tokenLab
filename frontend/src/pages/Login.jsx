@@ -64,11 +64,12 @@ export function Login() {
 
     const searchUser = async (formValues) => {
         try {
-            //console.log(formValues);
             await api.post("/user/getUser", formValues).then(res => {
-                console.log(res.data);
-                if (res.data.length !== 0) {
+                const user = res.data[0];
+
+                if (user !== undefined) {
                     alert("User logged");
+                    localStorage.setItem("usuario", JSON.stringify(user));
                     navigate('/home');
                 } else {
                     alert('user not find');

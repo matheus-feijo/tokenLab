@@ -1,127 +1,132 @@
-import {useNavigate} from "react-router-dom"
-import {api} from "../services/api";
-import React,{ useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom"
+import { api } from "../services/api";
+import React, { useState, useEffect } from "react";
 
 import { StyledInput, StyledPassword } from "../components/Inputs";
 import { StyledButton } from "../components/Buttons";
 
-import {useStyles} from "./Login";
+import { useStyles } from "./Login";
 
-export function Register(){
-    
+export function Register() {
+
     /**VARIAVEIS */
     const navigate = useNavigate();
     const classes = useStyles();
-    const [isSubmitting,setIsSubmitting] = useState(false);
-    const [formErrors,setFormErrors] = useState({});
-    const [formValues,setFormValues] = useState({
-        name:"",
-        email:"",
-        password:"",
-        
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [formErrors, setFormErrors] = useState({});
+    const [formValues, setFormValues] = useState({
+        name: "",
+        email: "",
+        password: "",
+
     })
 
     /**FUNCTIONS */
 
-    const submit = ()=>{
+    const submit = () => {
         createUser(formValues);
     }
-    
-    const createUser = async(formValues) =>{
+
+    const createUser = async (formValues) => {
         try {
-            await api.post("https://devfront.vize.solutions/api/authaccount/registration",formValues).then((res)=>{
-                if(res.data.message === "success"){
-                    alert("user registered successfully");
-                    navigate("/");
-                }else{
+            await api.post("/user/create", formValues).then((res) => {
+
+                if (!res.data.user) {
                     alert(res.data.message);
+                } else {
+                    alert(res.data.message);
+                    navigate('/')
                 }
-                
-            }).catch(erro=>{
+
+
+                //alert(res.data);
+                //navigate('/');
+
+            }).catch(erro => {
                 throw new Error(erro);
             })
         } catch (error) {
-            console.error("erro!!",error);
+            console.error("erro!!", error);
         }
     }
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = (e) => {
         //console.log("clickei")
         e.preventDefault();
         setIsSubmitting(true);
         setFormErrors(validate(formValues))
     }
 
-    const validate = (values) =>{
+    const validate = (values) => {
         const errors = {};
-        
-        if(!values.email){
+
+        if (!values.email) {
             errors.email = "Campo obrigatorio";
         }
-        if(!values.password){
+        if (!values.password) {
             errors.password = "Campo Obrigatorio";
         }
-        if(!values.name){
+        if (!values.name) {
             errors.name = "Campo obrigatorio";
         }
 
         return errors;
     }
 
-    const handleChange = (e)=>{
+    const handleChange = (e) => {
         e.preventDefault();
-        const {name,value} = e.target;
-        setFormValues({...formValues,[name]:value});
+        const { name, value } = e.target;
+        setFormValues({ ...formValues, [name]: value });
     }
 
 
     /**USE EFFECTS */
-    useEffect(()=>{
-        if(Object.keys(formErrors).length === 0 && isSubmitting){
+    useEffect(() => {
+        if (Object.keys(formErrors).length === 0 && isSubmitting) {
             submit();
             setIsSubmitting(false);
         }
-    },[formErrors,isSubmitting]);
+    }, [formErrors, isSubmitting]);
 
-    return(
+    return (
         <div className={classes.divContainerAllContent}>
             <form className={classes.form} onSubmit={handleSubmit}>
-                <div className={classes.formDivInputs}>   
+                <div className={classes.formDivInputs}>
 
                     {/**USUARIO */}
-                    <StyledInput 
+                    <StyledInput
                         formErrors={formErrors}
                         formValues={formValues}
                         handleChange={handleChange}
                         name="email"
-                    
+
                     />
-                    
+
                     {/**PASSWORD */}
-                    <StyledPassword 
+                    <StyledPassword
                         formErrors={formErrors}
                         formValues={formValues}
                         handleChange={handleChange}
-                    
+
                     />
 
                     {/**Nome */}
-                    <StyledInput 
+                    <StyledInput
                         formErrors={formErrors}
                         formValues={formValues}
                         handleChange={handleChange}
                         name="name"
                     />
-                    
+
                 </div>
-                
+
                 <div className={classes.formDivButtons}>
-                    <StyledButton 
+                    <StyledButton
                         className={classes.register}
                         variant="contained"
                         type="submit"
                     >
-                    Registrar
+                        Registrar
                     </StyledButton>
                 </div>
             </form>

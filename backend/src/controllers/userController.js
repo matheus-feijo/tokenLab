@@ -3,17 +3,32 @@ const User = require("../models/User");
 
 module.exports = {
     async createUser(req, res) {
-        const { user } = req.body;
+        const { name, email, password } = req.body;
 
         try {
-            User.create({
-                name: user.name,
-                email: user.email,
-                password: user.password,
-                created_at: new Date()
+            const user = await User.findOne({
+                where: {
+                    email: email,
+                }
             });
 
-            return res.status(200).send('usuario cadastrado com sucesso');
+            if (user === null) {
+                User.create({
+                    name: name,
+                    email: email,
+                    password: password,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                });
+
+                const newUser = await User.findOne({ where: { email: email } })
+
+                return res.status(200).json({ 'message': 'Usuario cadastrado com sucesso', 'user': newUser });
+
+            } else {
+                return res.status(203).json({ 'message': 'Email ja cadastrado' });
+            }
+
         } catch (error) {
             return res.status(400).send("nao foi possivel cadastrar usuario");
         }

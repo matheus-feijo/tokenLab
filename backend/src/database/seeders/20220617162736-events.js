@@ -6,7 +6,7 @@ module.exports = {
     await queryInterface.bulkInsert('events', [{
       date: '2022-06-25',
       description: 'Meu aniversario',
-      userId: 3
+      userId: 1
 
     }], {});
   },
@@ -15,7 +15,7 @@ module.exports = {
     await queryInterface.bulkDelete('events', [{
       date: '2022-06-25',
       description: 'Meu aniversario',
-      userId: 3
+      userId: 1
 
     }], {});
 

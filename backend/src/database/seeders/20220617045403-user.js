@@ -8,6 +8,7 @@ module.exports = {
       email: 'matheus@hotmail.com',
       password: '123456',
       created_at: new Date(),
+      updated_at: new Date(),
     }], {});
 
   },
@@ -19,6 +20,7 @@ module.exports = {
       email: 'matheus@hotmail.com',
       password: '123456',
       created_at: new Date(),
+      updated_at: new Date(),
     }], {});
 
   }
