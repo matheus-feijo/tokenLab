@@ -65,9 +65,7 @@ export function Login() {
     const searchUser = async (formValues) => {
         try {
             console.log(formValues);
-            await api.post("/user/getUser", {
-                teste: 'oi'
-            }).then(res => {
+            await api.post("/user/getUser", formValues).then(res => {
                 console.log(res);
 
             }).catch(erro => {
@@ -77,20 +75,6 @@ export function Login() {
             console.error("erro!!", error)
         }
     }
-
-    const teste = async () => {
-        try {
-            await api.get("/user/getAll").then(res => {
-                console.log(res);
-
-            }).catch(erro => {
-                throw new Error(erro);
-            })
-        } catch (error) {
-            console.error("erro!!", error)
-        }
-    }
-
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -130,9 +114,6 @@ export function Login() {
         }
     }, [formErrors, isSubmitting]);
 
-    useEffect(() => {
-        //teste();
-    }, [])
 
     return (
         <div className={classes.divContainerAllContent}>

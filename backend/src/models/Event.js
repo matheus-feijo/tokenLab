@@ -1,9 +1,15 @@
-module.exports = (sequelize, DataTypes) => {
-    const Event = sequelize.define('events', {
-        date: DataTypes.DATE,
-        description: DataTypes.TEXT,
-        userId: DataTypes.INTEGER,
-    })
+const { Model, DataTypes } = require('sequelize');
 
-    return Event;
+class User extends Model {
+    static init(sequelize) {
+        super.init({
+            date: DataTypes.DATE,
+            description: DataTypes.TEXT,
+            userId: DataTypes.INTEGER,
+        }, {
+            sequelize
+        })
+    }
 }
+
+module.exports = User;
