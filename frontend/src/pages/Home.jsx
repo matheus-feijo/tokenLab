@@ -31,17 +31,7 @@ export function Home() {
 
     /**FUNCTIONS */
     const searchUser = async () => {
-        try {
-            api.defaults.headers.authorization = `Bearer ${id}`;
-            await api.get("https://devfront.vize.solutions/api/users?page=1").then((res) => {
-                //console.log(res.data.data);
-                setUserList(res.data.data);
-            }).catch(err => {
-                throw new Error(err);
-            })
-        } catch (error) {
-            console.error("erro!!", error);
-        }
+
     }
 
     /**USE EFFECTS */
