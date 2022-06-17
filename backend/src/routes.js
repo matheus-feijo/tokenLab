@@ -6,7 +6,6 @@ const cors = require('cors');
 
 const routes = express.Router();
 
-routes.use(cors());
 routes.post('/user/create', userController.createUser);
 routes.put('/user/update', userController.updateUser);
 routes.delete('/user/delete', userController.deleteUser);

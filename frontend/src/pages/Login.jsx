@@ -64,9 +64,15 @@ export function Login() {
 
     const searchUser = async (formValues) => {
         try {
-            console.log(formValues);
+            //console.log(formValues);
             await api.post("/user/getUser", formValues).then(res => {
-                console.log(res);
+                console.log(res.data);
+                if (res.data.length !== 0) {
+                    alert("User logged");
+                    navigate('/home');
+                } else {
+                    alert('user not find');
+                }
 
             }).catch(erro => {
                 throw new Error(erro);

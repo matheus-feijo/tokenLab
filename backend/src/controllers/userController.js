@@ -67,24 +67,20 @@ module.exports = {
         }
     },
     async getUser(req, res) {
-        console.log(req.body);
+        const { email, password } = req.body;
 
-        // const { user } = req.body;
+        try {
+            const userLogged = await User.findAll({
+                where: {
+                    email: email,
+                    password: password,
+                }
+            });
+            return res.status(200).json(userLogged);
 
-        // try {
-        //     const userLogged = User.findAll({
-        //         where: {
-        //             email: user.email,
-        //             password: user.password,
-        //         }
-        //     });
-
-        //     return res.status(200).send(userLogged);
-
-        // } catch (error) {
-        //     return res.status(400).send("usuario nao cadastrado");
-        // }
-
+        } catch (error) {
+            return res.status(400).send("usuario nao cadastrado");
+        }
 
     }
 }

@@ -6,15 +6,12 @@ require('./database');
 
 const app = express();
 
-app.use(routes);
+
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cors());
+app.use(routes);
 
 
-
-app.listen(3333, () => {
-    console.log("server rodando");
-});
+app.listen(3333);
 
