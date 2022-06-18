@@ -85,7 +85,7 @@ module.exports = {
         const { email, password } = req.body;
 
         try {
-            const userLogged = await User.findAll({
+            const userLogged = await User.findOne({
                 where: {
                     email: email,
                     password: password,

@@ -65,9 +65,9 @@ export function Login() {
     const searchUser = async (formValues) => {
         try {
             await api.post("/user/getUser", formValues).then(res => {
-                const user = res.data[0];
+                const user = res.data;
 
-                if (user !== undefined) {
+                if (user !== null) {
                     alert("User logged");
                     localStorage.setItem("usuario", JSON.stringify(user));
                     navigate('/home');

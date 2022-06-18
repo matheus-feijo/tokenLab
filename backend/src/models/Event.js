@@ -1,9 +1,10 @@
 const { Model, DataTypes } = require('sequelize');
 
-class User extends Model {
+class Event extends Model {
     static init(sequelize) {
         super.init({
-            date: DataTypes.DATE,
+            date_start: DataTypes.DATE,
+            date_end: DataTypes.DATE,
             description: DataTypes.TEXT,
             userId: DataTypes.INTEGER,
         }, {
@@ -12,4 +13,4 @@ class User extends Model {
     }
 }
 
-module.exports = User;
+module.exports = Event;

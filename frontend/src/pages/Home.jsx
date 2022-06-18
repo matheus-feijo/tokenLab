@@ -1,8 +1,9 @@
 import { makeStyles, Typography } from "@material-ui/core";
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import { TableUsers } from "../components/TableUsers";
 import { api } from "../services/api";
+import moment from 'moment';
 
 const useStyles = makeStyles(() => ({
     title: {
@@ -25,31 +26,41 @@ const useStyles = makeStyles(() => ({
 export function Home() {
 
     /**VARIAVEIS */
-    const [userList, setUserList] = useState([]);
+    const [events, setEvents] = useState([]);
     const classes = useStyles();
-    const { id } = useParams();
 
-    /**FUNCTIONS */
-    const searchUser = async () => {
+    const getUserEvents = async () => {
+        const user = JSON.parse(localStorage.getItem('usuario'));
 
+        try {
+            await api.get(`/events/${user.id}`).then((res) => {
+                console.log(res.data);
+                setEvents(res.data);
+            }).catch((err) => {
+                console.log(err);
+            })
+        } catch (error) {
+            throw new Error(error);
+        }
     }
 
     /**USE EFFECTS */
     useEffect(() => {
-        searchUser();
-        console.log(localStorage.getItem("usuario"));
+        getUserEvents();
     }, []);
 
     return (
         <div className={classes.divContainerAll}>
-            <div className={classes.divContent}>
-                <Typography className={classes.title}>Usuarios:</Typography>
-                <div className={classes.content}>
-                    <TableUsers
-                        users={userList}
-                    />
-                </div>
-            </div>
+            {events.map((evento, ind) => {
+                return (
+                    <Fragment>
+                        <p>
+                            {`inicio:${moment(evento.date_start).format()} fim:${moment(evento.date_end).format()} description:${evento.description}`}
+                        </p>
+                    </Fragment>
+                )
+            })}
+
         </div>
     )
 }

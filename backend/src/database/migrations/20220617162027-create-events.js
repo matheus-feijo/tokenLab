@@ -10,7 +10,11 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      date: {
+      date_start: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      date_end: {
         allowNull: false,
         type: Sequelize.DATE,
       },
@@ -18,7 +22,7 @@ module.exports = {
         allowNull: true,
         type: Sequelize.TEXT,
       },
-      userId: {
+      user_id: {
         type: Sequelize.INTEGER,
         references: {
           model: {
