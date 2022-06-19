@@ -10,6 +10,8 @@ class User extends Model {
             sequelize
         })
     }
+
+    
 }
 
 module.exports = User;

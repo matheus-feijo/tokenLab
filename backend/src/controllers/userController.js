@@ -91,6 +91,8 @@ module.exports = {
                     password: password,
                 }
             });
+            //console.log(userLogged);
+
             return res.status(200).json(userLogged);
 
         } catch (error) {

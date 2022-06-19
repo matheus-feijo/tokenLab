@@ -6,10 +6,14 @@ class Event extends Model {
             date_start: DataTypes.DATE,
             date_end: DataTypes.DATE,
             description: DataTypes.TEXT,
-            userId: DataTypes.INTEGER,
+            user_id: DataTypes.INTEGER,
         }, {
             sequelize
         })
+    }
+
+    static associate(models) {
+        this.belongsTo(models.Event, { foreignKey: 'user_id', as: 'users', through: 'id' })
     }
 }
 

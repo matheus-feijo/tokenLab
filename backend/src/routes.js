@@ -14,6 +14,7 @@ routes.get('/user/getAll', userController.getAllUser);
 routes.post('/user/getUser', userController.getUser);
 
 routes.get('/events/:id', eventController.getAllEvents);
+routes.post('/events/create', eventController.createEvents);
 
 
 
