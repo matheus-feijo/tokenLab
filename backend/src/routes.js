@@ -1,9 +1,6 @@
 const express = require('express');
 const userController = require('./controllers/userController');
 const eventController = require('./controllers/eventController');
-const cors = require('cors');
-
-
 
 const routes = express.Router();
 
@@ -15,6 +12,8 @@ routes.post('/user/getUser', userController.getUser);
 
 routes.get('/events/:id', eventController.getAllEvents);
 routes.post('/events/create', eventController.createEvents);
+routes.delete('/events/delete/:id', eventController.deleteEvents);
+routes.put('/events/update', eventController.updateEvents);
 
 
 

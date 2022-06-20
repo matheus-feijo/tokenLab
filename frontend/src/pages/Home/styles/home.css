@@ -1,0 +1,47 @@
+header{
+    height: 6vh;
+    background-color: #008F8C;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+}
+
+form{
+    width: 90%;
+    display: grid;
+    justify-content: center;
+    padding-top: 100px;
+    row-gap: 10px;
+}
+
+.container-user-events{
+    width: 90%;
+    display: grid;
+    padding-top: 100px;
+    row-gap: 10px;
+}
+
+.content-home-user-events{
+    background-color:#008F8C;
+    width: 100%;
+    min-height: 10vh;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.content-home-user-events p{
+    color:#ffff;
+    font:bold 19px "Roboto";
+}
+
+.content-home-user-events .description{
+    width: 80%;
+}
+
+.container-user-events .hours{
+    width: 25%;
+}
