@@ -30,28 +30,17 @@ export function Register() {
     const createUser = async (formValues) => {
         try {
             await api.post("/user/create", formValues).then((res) => {
-
-                if (!res.data.user) {
-                    alert(res.data.message);
-                } else {
-                    alert(res.data.message);
-                    navigate('/')
-                }
-
-
-                //alert(res.data);
-                //navigate('/');
-
+                navigate('/')
+                alert(res.data.message);
             }).catch(erro => {
-                throw new Error(erro);
+                alert('nao foi possivel criar usuario');
             })
         } catch (error) {
-            console.error("erro!!", error);
+            throw new Error(error);
         }
     }
 
     const handleSubmit = (e) => {
-        //console.log("clickei")
         e.preventDefault();
         setIsSubmitting(true);
         setFormErrors(validate(formValues))

@@ -1,4 +1,4 @@
-import { Button, CircularProgress, IconButton, makeStyles } from "@material-ui/core";
+import { Button, CircularProgress, IconButton, makeStyles, Typography } from "@material-ui/core";
 import { Fragment, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import moment from 'moment';
@@ -23,6 +23,10 @@ const useStyles = makeStyles(() => ({
     },
     divContent: {
         width: "80%",
+    },
+    notEventTypography: {
+        textAlign: "center",
+        font: "bold 24px Roboto"
     }
 }))
 
@@ -51,9 +55,9 @@ export function Home() {
         try {
             await api.get(`/events/${user.id}`).then((res) => {
                 setUserEvents(res.data);
-                console.log(res.data)
+                //console.log(res.data)
             }).catch((err) => {
-                console.log(err);
+                alert("nao foi possivel listar eventos");
             })
         } catch (error) {
             throw new Error(error);
@@ -231,7 +235,7 @@ export function Home() {
             {(!loading) &&
                 <div className="container-user-events">
 
-                    {userEvents.map((evento, index) => {
+                    {userEvents.length !== 0 ? userEvents.map((evento, index) => {
                         return (
                             <div className="content-home-user-events" key={index}>
                                 <p className="description" >
@@ -247,7 +251,7 @@ export function Home() {
 
                             </div>
                         )
-                    })}
+                    }) : <Typography className={classes.notEventTypography}>Usuario nao possui ainda nenhum evento</Typography>}
 
 
                 </div>

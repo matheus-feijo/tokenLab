@@ -24,7 +24,8 @@ export const useStyles = makeStyles(() => ({
 
     formDivInputs: {
         display: "grid",
-        gap: "20px"
+        gap: "20px",
+        width: "40vh"
     },
 
     formDivButtons: {
@@ -68,18 +69,18 @@ export function Login() {
                 const user = res.data;
 
                 if (user !== null) {
-                    alert("User logged");
+                    alert("Entrando");
                     localStorage.setItem("usuario", JSON.stringify(user));
                     navigate('/home');
                 } else {
-                    alert('user not find');
+                    alert('usuario nao encontrado');
                 }
 
             }).catch(erro => {
-                throw new Error(erro);
+                alert('Usuario ou senha incorreto')
             })
         } catch (error) {
-            console.error("erro!!", error)
+            throw new Error(error);
         }
     }
 
@@ -103,7 +104,6 @@ export function Login() {
     }
 
     const handleRegisterNewUser = (e) => {
-        //console.log("test")
         navigate("cadastro");
     }
 
