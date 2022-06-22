@@ -243,7 +243,7 @@ export function Home() {
                                 </p>
 
                                 <p className="hours">
-                                    {`${moment(evento.date_start).format('MMMM Do YYYY, h:mm:ss')} até ${moment(evento.date_end).format('MMMM Do YYYY, h:mm:ss')}`}
+                                    {`${moment(evento.date_start).format("DD/MM/YYYY hh:mm:ss")} até ${moment(evento.date_end).format("DD/MM/YYYY hh:mm:ss")}`}
                                 </p>
 
                                 <IconButton children={<EditIcon />} onClick={(e) => handleEditEvent(e, evento)} />
